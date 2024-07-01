@@ -1,88 +1,89 @@
-/*
- * Rui Santos 
- * Complete Project Details http://randomnerdtutorials.com
- */
+// Define pins for traffic lights and pedestrian lights
+int redCar = 13; // Pin for red car light
+int yellowCar = 12; // Pin for yellow car light
+int greenCar = 11; // Pin for green car light
+int greenPed = 2; // Pin for green pedestrian light
+int redPed = 3; // Pin for red pedestrian light
+int button = 7; // Pin for pedestrian button
 
-int redCar = 13; 
-int yellowCar = 12; 
-int greenCar = 11; 
-int greenPed = 2;
-int redPed = 3; 
-int button = 7;
-int crossTime = 2000;
-unsigned long changeTime;
-bool carGreenBlink = false;
+// Define timing variables
+int crossTime = 2000; // Time for pedestrian to cross
+unsigned long changeTime; // Last time the lights were changed
+bool carGreenBlink = true; // Flag to blink green car light
 
 void setup() {
-  // initialize timer
+  // Initialize the changeTime variable
   changeTime = millis();
-  // here we are initializing our pins as outputs
+
+  // Set pin modes for traffic lights and pedestrian lights
   pinMode(redCar, OUTPUT);
   pinMode(yellowCar, OUTPUT);
   pinMode(greenCar, OUTPUT);
   pinMode(redPed, OUTPUT);
   pinMode(greenPed, OUTPUT);
   pinMode(button, INPUT);
-  //turn on the green light
-  digitalWrite(greenCar, HIGH);
-  digitalWrite(redPed, HIGH);
-  digitalWrite(redCar, LOW);
-  digitalWrite(yellowCar, LOW);
-  digitalWrite(greenPed, LOW);
+
+  // Set initial states for lights
+  digitalWrite(greenCar, HIGH); // Green car light on
+  digitalWrite(redPed, HIGH); // Red pedestrian light on
+  digitalWrite(redCar, LOW); // Red car light off
+  digitalWrite(yellowCar, LOW); // Yellow car light off
+  digitalWrite(greenPed, LOW); // Green pedestrian light off
+
+  // Initialize serial communication
   Serial.begin(9600);
 }
 
 void loop() {
-  // this variable will tell us if the button is pressed
-  int state = digitalRead(button); 
-  Serial.println(state);
-  // if the button is pressed and if it has passed 5 seconds since last button press 
-  if (state == HIGH && (millis() - changeTime) > 5000) {
-    //call the function to change the lights
-    changeLights();
+  // Blink the green car light if carGreenBlink is true
+  if (carGreenBlink) {
+    digitalWrite(greenCar, !digitalRead(greenCar)); // Toggle green car light
+    delay(500); // Wait for 500ms
   }
 
-  // Check if the car green light should blink
-  if (carGreenBlink) {
-    digitalWrite(greenCar, !digitalRead(greenCar));  // Toggle green car light
-    delay(500);  // Blink interval
+  // Read the state of the pedestrian button
+  int state = digitalRead(button); 
+  Serial.println(state); // Print the state to the serial monitor
+
+  // If the button is pressed and more than 5 seconds have passed since the last change
+  if (state == HIGH && (millis() - changeTime) > 5000) {
+    changeLights(); // Change the lights
   }
 }
 
 void changeLights() {
-  digitalWrite(greenCar, LOW);    // the green LED will turn off
-  digitalWrite(yellowCar, HIGH); // the yellow LED will turn on for 2 second
-  delay(2000); 
-  
-  digitalWrite(yellowCar, LOW); // the yellow LED will turn off
-  digitalWrite(redCar, HIGH); // the red LED will turn on for 5 seconds
+  // Turn off the green car light and turn on the yellow car light
+  digitalWrite(greenCar, LOW);
+  digitalWrite(yellowCar, HIGH);
+  delay(2000); // Wait for 2 seconds
 
+  // Turn off the yellow car light and turn on the red car light
+  digitalWrite(yellowCar, LOW);
+  digitalWrite(redCar, HIGH);
+
+  // Turn off the red pedestrian light and turn on the green pedestrian light
   digitalWrite(redPed, LOW);
   digitalWrite(greenPed, HIGH);
-  delay(crossTime);
-  
-  // flash the ped green
-  // for (int x=0; x<10; x++) {
-  //   digitalWrite(greenPed, LOW);
-  //   delay(150);
-  //   digitalWrite(greenPed, HIGH);
-  //   delay(150);
-  // }
-  // Flash the ped green
+  delay(crossTime); // Wait for pedestrian to cross
+
+  // Blink the green pedestrian light for 5 seconds
   for (int x = 0; x < 10; x++) {
-    digitalWrite(greenPed, !digitalRead(greenPed));  // Toggle greenPed state
-    delay(150);  // Delay for half of the blink period
-    digitalWrite(greenPed, !digitalRead(greenPed));  // Toggle greenPed state again
-    delay(150);  // Delay for the other half of the blink period
+    digitalWrite(greenPed, !digitalRead(greenPed)); // Toggle green pedestrian light
+    delay(500); // Wait for 500ms
+    digitalWrite(greenPed, !digitalRead(greenPed)); // Toggle green pedestrian light
+    delay(500); // Wait for 500ms
   }
 
-
+  // Turn off the green pedestrian light and turn on the red pedestrian light
   digitalWrite(greenPed, LOW);
-  digitalWrite(redCar, LOW);
   digitalWrite(redPed, HIGH);
 
-  // Set the flag to start blinking the green car light
+  // Turn off the red car light
+  digitalWrite(redCar, LOW);
+
+  // Set the flag to blink the green car light
   carGreenBlink = true;
 
+  // Update the changeTime variable
   changeTime = millis();
 }
