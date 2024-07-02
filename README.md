@@ -93,6 +93,53 @@ For this project, you will need the following parts:
 - **LED Brightness:**
   - Adjust the brightness of the LED using a potentiometer connected to the Arduino.
 
+---
+
+# Ultrasonic Sensor HC-SR04 with Arduino
+
+Welcome to the Ultrasonic Sensor HC-SR04 project repository! This project demonstrates how to use the HC-SR04 ultrasonic sensor with Arduino Uno to measure distances and control an LED based on the distance threshold.
+
+## Overview
+
+This project utilizes the HC-SR04 ultrasonic sensor to accurately measure distances using sonar technology. It displays the measured distance on the Serial Monitor and lights up an LED when the distance is less than 100 cm.
+
+## Description
+
+The HC-SR04 ultrasonic sensor is designed for non-contact distance measurement. It operates by emitting ultrasonic pulses and calculating the time it takes for the pulses to bounce back from an object. This time interval helps determine the distance based on the speed of sound.
+
+### Features
+
+- **Power Supply:** +5V DC
+- **Quiescent Current:** <2mA
+- **Working Current:** 15mA
+- **Ranging Distance:** 2cm – 400cm / 1″ – 13ft
+- **Resolution:** 0.3 cm
+- **Measuring Angle:** 30 degrees
+- **Trigger Input Pulse Width:** 10uS
+
+## Components Needed
+
+- Arduino UNO
+- HC-SR04 Ultrasonic Sensor
+- 1 x LED (connected to Pin 5 for indication)
+- 220Ω Resistor (for the LED)
+- Breadboard
+- Jumper wires
+
+## How Does it Work?
+
+1. **Triggering**: The Arduino sends a short pulse to the trigger pin (Trig).
+2. **Echo Reception**: The sensor listens for the echo signal (Echo) reflected from an object.
+3. **Distance Calculation**: The Arduino calculates the distance based on the time difference between sending and receiving signals.
+
+### LED Control
+
+- **Distance Threshold**: If the measured distance is less than 100 cm, the LED connected to Pin 5 lights up to indicate proximity.
+
+## Simulation Link
+
+[Link to Wokwi Simulation](https://wokwi.com/projects/402284504252972033)
+
 ## License
 
 This repository is licensed under the MIT License. See the LICENSE file for more information.
