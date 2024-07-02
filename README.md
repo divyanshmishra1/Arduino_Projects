@@ -1,14 +1,14 @@
-Welcome to the Arduino Projects repository! This repository contains various Arduino projects that you can explore and replicate. Each project comes with detailed instructions, circuit diagrams, required components, and more.
+# Welcome to the Arduino Projects repository!
+This repository contains various Arduino projects that you can explore and replicate. Each project comes with detailed instructions, circuit diagrams, required components, and more.
 
-Project 1: Traffic Lights System with Pedestrian Crossing
 
-
+**Project 1: Traffic Lights System with Pedestrian Crossing**
 Welcome to the Traffic Lights System project repository! This project simulates a traffic light system for cars and pedestrians using Arduino Uno.
 
-Overview
-This project replicates a standard traffic lights system with additional pedestrian crossing signals. It includes LEDs for car traffic lights (green, yellow, red), pedestrian traffic lights (green, red), and a pushbutton to control pedestrian signals.
+**Overview**
+This project replicates a standard traffic lights system with additional pedestrian crossing signals. It includes LEDs for car traffic lights (green, yellow, red), pedestrian traffic lights (green, red), and a push button to control pedestrian signals.
 
-Components Needed
+**Components Needed**
 Arduino Uno
 3 x LEDs (Red, Yellow, Green) for car traffic lights
 2 x LEDs (Red, Green) for pedestrian traffic lights
@@ -17,12 +17,11 @@ Resistors
 Breadboard
 Jumper wires
 
+**Simulation Link**
+https://wokwi.com/projects/401846567697532929
 
-Simulation Link
-Link to Tinkercad Simulation
 
-
-Instructions
+**Instructions**
 Setting Up the Circuit:
 Connect Components:
 
