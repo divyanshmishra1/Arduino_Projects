@@ -1,17 +1,16 @@
-// include the library code
 #include <LiquidCrystal.h>
 
-// initialize the library with the numbers of the interface pins
+// Initialize the LCD library with the interface pins
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
-int potPin = A0;       // Analog pin 0 for the LED brightness potentiometer
-int ledPin = 6;        // LED Digital Pin with PWM
-int potValue = 0;      // variable to store the value coming from the potentiometer
-int brightness = 0;    // converts the potValue into a brightness 
-int pBari = 0;         // progress bar
-int i = 0;             // foor loop
 
-//progress bar character for brightness
-byte pBar[8] = {
+// Define pin assignments and variables
+const int potPin = A0;       // Analog pin for the LED brightness potentiometer
+const int ledPin = 6;        // PWM pin for controlling the LED
+int potValue = 0;            // Store the value from the potentiometer
+int brightness = 0;          // Calculated brightness level for the LED
+int progressSteps = 17;      // Number of steps for the progress bar
+int progressBarLength = 8;   // Length of the progress bar on the LCD
+byte progressBar[8] = {      // Custom character for the progress bar
   B11111,
   B11111,
   B11111,
@@ -19,40 +18,51 @@ byte pBar[8] = {
   B11111,
   B11111,
   B11111,
+  B11111
 };
 
 void setup() {
-  // setup our led as an OUTPUT
+  // Set up the LED pin as an output
   pinMode(ledPin, OUTPUT); 
-  // set up the LCD's number of columns and rows: 
+
+  // Set up the LCD with 16 columns and 2 rows
   lcd.begin(16, 2);
-  // Print a message to the LCD
+
+  // Display initial message on the LCD
   lcd.print(" LED Brightness");
-  //Create the progress bar character
-  lcd.createChar(0, pBar);
+
+  // Create custom character for the progress bar
+  lcd.createChar(0, progressBar);
 }
 
 void loop() {
-  // clears the LCD screen
+  // Clear the LCD screen
   lcd.clear();
-  // Print a message to the LCD
+
+  // Display message on the LCD
   lcd.print(" LED Brightness");
-  //set the cursor to line number 2
-  lcd.setCursor(0,1);
-  // read the value from the potentiometer
+
+  // Set the cursor to the second line
+  lcd.setCursor(0, 1);
+
+  // Read the value from the potentiometer
   potValue = analogRead(potPin);        
-  // turns the potValue into a brightness for the LED
-  brightness=map(potValue, 0, 1024, 0, 255); 
-  //lights up the LED according to the bightness
+
+  // Map the potentiometer value to LED brightness (0-255)
+  brightness = map(potValue, 0, 1023, 0, 255); 
+
+  // Adjust the LED brightness
   analogWrite(ledPin, brightness); 
-  // turns the brighness into a percentage for the bar 
-  pBari=map(brightness, 0, 255, 0, 17);
-  //prints the progress bar
-  for (i=0; i<pBari; i++)
-  {
+
+  // Map brightness to the progress bar length
+  int progressBarLength = map(brightness, 0, 255, 0, progressSteps);
+
+  // Display the progress bar on the LCD
+  for (int i = 0; i < progressBarLength; i++) {
     lcd.setCursor(i, 1);   
     lcd.write(byte(0));  
   }
-  // delays 750 ms
+
+  // Delay before updating again
   delay(750);        
 }
