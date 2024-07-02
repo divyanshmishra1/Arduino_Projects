@@ -50,7 +50,7 @@ This project replicates a standard traffic lights system with additional pedestr
 - **Pushbutton:**
   - Mimics a pedestrian request button.
   - Pressing the button activates the pedestrian green light after the car green light turns red.
-
+  ---
 
 
 
