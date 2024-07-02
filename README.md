@@ -95,7 +95,8 @@ For this project, you will need the following parts:
 
 ---
 
-# Ultrasonic Sensor HC-SR04 with Arduino
+ 
+## Project 3: Ultrasonic Sensor HC-SR04 with Arduino
 
 Welcome to the Ultrasonic Sensor HC-SR04 project repository! This project demonstrates how to use the HC-SR04 ultrasonic sensor with Arduino Uno to measure distances and control an LED based on the distance threshold.
 
