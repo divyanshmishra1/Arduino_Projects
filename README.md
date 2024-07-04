@@ -141,6 +141,64 @@ The HC-SR04 ultrasonic sensor is designed for non-contact distance measurement. 
 
 [Link to Wokwi Simulation](https://wokwi.com/projects/402284504252972033)
 
+---
+
+
+## Project: Parking Sensor (Distance-Based Alarm System with LED Display)
+
+**Overview**
+
+Welcome to the Distance-Based Alarm System project repository! This project uses an ultrasonic sensor, a piezo buzzer, and a shift register to create an alarm system that provides both auditory and visual feedback based on the proximity of an object. The closer the object, the higher the frequency of the beep and the more LEDs light up.
+
+**Components Needed**
+
+- ESP32 or Arduino
+- HC-SR04 Ultrasonic Sensor
+- Piezo Buzzer
+- 74HC595 Shift Register
+- 8 LEDs
+- Resistors (220Ω)
+- Breadboard
+- Jumper Wires
+
+**Simulation Link**
+
+[Link to Wokwi Simulation](https://wokwi.com/projects/402469953305490433)
+
+**Instructions**
+
+### Setting Up the Circuit:
+1. **Connect Components:**
+   - Connect the HC-SR04 ultrasonic sensor to the specified pins on the ESP32 or Arduino.
+   - Connect the piezo buzzer to the designated pin.
+   - Connect the LEDs to the shift register and then connect the shift register to the specified pins on the ESP32 or Arduino.
+
+2. **Upload Arduino Sketch:**
+   - Upload the provided Arduino sketch to control the distance measurement, sound generation, and LED patterns.
+
+### How It Works:
+- **Distance Measurement:**
+  - The ultrasonic sensor sends out a pulse and measures the time it takes for the echo to return, calculating the distance to an object.
+  - This distance is printed to the serial monitor.
+
+- **Proximity Mapping:**
+  - The measured distance is mapped to a proximity level (0 to 8). This mapping uses the `map()` function, which scales the distance to fit within the desired range of proximity levels.
+
+- **Auditory Feedback:**
+  - The proximity level determines the frequency of the beep from the piezo buzzer.
+  - Higher frequencies indicate closer objects, providing a shrill and anxious tone as the object approaches.
+
+- **Visual Feedback:**
+  - The proximity level determines the pattern displayed on the LEDs using a shift register.
+  - More LEDs light up as the object gets closer, providing a visual indication of proximity.
+
+- **Shift Register:**
+  - The shift register is used to control multiple LEDs efficiently, reducing the number of pins needed on the microcontroller.
+  - Each bit in the binary number represents the state (on/off) of an LED.
+
+---
+
+
 ## License
 
 This repository is licensed under the MIT License. See the LICENSE file for more information.
