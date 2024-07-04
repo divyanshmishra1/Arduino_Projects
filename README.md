@@ -144,7 +144,7 @@ The HC-SR04 ultrasonic sensor is designed for non-contact distance measurement. 
 ---
 
 
-## Project: Parking Sensor (Distance-Based Alarm System with LED Display)
+## Project 4: Parking Sensor (Distance-Based Alarm System with LED Display)
 
 **Overview**
 
